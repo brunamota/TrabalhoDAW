@@ -1,6 +1,6 @@
 ![Logo][Logo-Projeto]
 
-[Logo-Projeto]: https://github.com/brunamota/trabalhoDAW/blob/main/resource/teste.png
+[Logo-Projeto]: https://github.com/brunamota/trabalhoDAW/blob/main/resource/teste%20(1).png
 # Trabalho DAW - Job Pool
 ## Grupo: Bruna Mota Barbosa, Lígia Gouveia Silva, Leonardo Rocha Freitas
 
