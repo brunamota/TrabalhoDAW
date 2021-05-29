@@ -2,7 +2,7 @@
 ## Grupo: Bruna Mota Barbosa, Lígia Gouveia Silva, Leonardo Rocha Freitas
 
 
-[![JoobMER][MER-image]]
+![JoobMER][MER-image]
 
 
 
