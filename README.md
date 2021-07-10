@@ -7,7 +7,7 @@
 
 ![JoobMER][MER-image]
 
-[MER-image]: https://github.com/brunamota/trabalhoDAW/blob/main/resource/JobPool.png
+[MER-image]: https://github.com/brunamota/trabalhoDAW/blob/main/resource/MER%20-%20JopPool.png
 
 ## Objetivos
 - Gerar um canal entre os alunos da UFJ e as empresas para conseguir estágios.
