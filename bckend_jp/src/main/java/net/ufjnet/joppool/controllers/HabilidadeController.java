@@ -27,19 +27,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import net.ufjnet.joppool.dtos.VagaDTO;
-import net.ufjnet.joppool.services.GestaoVaga;
+import net.ufjnet.joppool.dtos.HabilidadeDTO;
+import net.ufjnet.joppool.services.GestaoHabilidade;
 
 @RestController
-@RequestMapping("/v1/jp/vagas")
-@Tag(name = "Endpoint de Vaga") 
-public class VagaController {
-	@Autowired
-	private GestaoVaga service;
+@RequestMapping("/v1/jp/habilidades")
+@Tag(name = "Endpoint de Habilidade") 
+public class HabilidadeController {
 	
+	@Autowired
+	private GestaoHabilidade service;
+
 	@GetMapping
-	@Operation(summary = "Busca todas as empresas")
-	public ResponseEntity<CollectionModel<VagaDTO>> buscarTodos(
+	@Operation(summary = "Busca todas as habilidades")
+	public ResponseEntity<CollectionModel<HabilidadeDTO>> buscarTodos(
 			@RequestParam(value ="page", defaultValue ="0") int page,
 			@RequestParam(value ="limit", defaultValue ="12") int limit,
 			@RequestParam(value ="direction", defaultValue ="asc") String direction){
@@ -48,57 +49,50 @@ public class VagaController {
 		
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection,"nome"));
 		
-		Page<VagaDTO> pages = service.findAll(pageable);		
+		Page<HabilidadeDTO> pages = service.findAll(pageable);		
 		
 		pages.stream()
-			 .forEach(v->v.add(
-					 linkTo(methodOn(VagaController.class).buscarUm(v.getIdVaga())).withSelfRel()
+			 .forEach(h->h.add(
+					 linkTo(methodOn(HabilidadeController.class).buscarUm(h.getIdHabilidade())).withSelfRel()
 					 )
 			);
 		return ResponseEntity.ok(CollectionModel.of(pages));
 	}
-		
-	@GetMapping("/{idVaga}")
-	@Operation(summary = "Busca uma empresa por id")
-	public ResponseEntity<VagaDTO>buscarUm(@PathVariable Integer idVaga){
-		VagaDTO objDTO = service.findById(idVaga);
-		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(idVaga)).withSelfRel());
+	
+	@GetMapping("/{idHabilidade}")
+	@Operation(summary = "Busca uma habilidade por id")
+	public ResponseEntity<HabilidadeDTO>buscarUm(@PathVariable Integer idHabilidade){
+		HabilidadeDTO objDTO = service.findById(idHabilidade);
+		objDTO.add(linkTo(methodOn(HabilidadeController.class).buscarUm(idHabilidade)).withSelfRel());
 		return ResponseEntity.ok(objDTO);
 		
 	}
-	@GetMapping("/nome/{nome}")
-	@Operation(summary = "Busca uma empresa por nome")
-	public ResponseEntity<VagaDTO> buscarNome(@PathVariable String nome) {
-		VagaDTO objDTO = service.findByNome(nome);
-			objDTO.add(linkTo(methodOn(VagaController.class).buscarNome(nome)).withSelfRel());
-			return ResponseEntity.ok(objDTO);
-		}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@Operation(summary = "Insere uma nova empresa")
-	public ResponseEntity<VagaDTO> incluir(@RequestBody @Valid VagaDTO objBody){
-		VagaDTO objDTO = service.save(objBody);
-		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(objDTO.getIdVaga())).withSelfRel());
+	@Operation(summary = "Insere uma nova habilidade")
+	public ResponseEntity<HabilidadeDTO> incluir(@RequestBody @Valid HabilidadeDTO objBody){
+		HabilidadeDTO objDTO = service.save(objBody);
+		objDTO.add(linkTo(methodOn(HabilidadeController.class).buscarUm(objDTO.getIdHabilidade())).withSelfRel());
 		return ResponseEntity.ok(objDTO);
 	}
 	
 	@PutMapping
-	@Operation(summary = "Atualiza uma empresa por id")
-	public ResponseEntity<VagaDTO> atualizar(@RequestBody VagaDTO objBody) {
-		VagaDTO objDTO = service.update(objBody);
-		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(objDTO.getIdVaga())).withSelfRel());
+	@Operation(summary = "Atualiza uma habilidade por id")
+	public ResponseEntity<HabilidadeDTO> atualizar(@RequestBody HabilidadeDTO objBody) {
+		HabilidadeDTO objDTO = service.update(objBody);
+		objDTO.add(linkTo(methodOn(HabilidadeController.class).buscarUm(objDTO.getIdHabilidade())).withSelfRel());
 		return ResponseEntity.ok(objDTO);
 	}
 	
-	@DeleteMapping("/{idVaga}")
-	@Operation(summary = "Exclui uma empresa por id")
-	public ResponseEntity<Void> excluir(@PathVariable Integer idVaga) {
-		if (!service.existById(idVaga)) {
+	@DeleteMapping("/{idHabilidade}")
+	@Operation(summary = "Exclui uma habilidade por id")
+	public ResponseEntity<Void> excluir(@PathVariable Integer idHabilidade) {
+		if (!service.existById(idHabilidade)) {
 			return ResponseEntity.notFound().build();
 		}
 
-		service.deleteById(idVaga);
+		service.deleteById(idHabilidade);
 
 		return ResponseEntity.noContent().build();
 

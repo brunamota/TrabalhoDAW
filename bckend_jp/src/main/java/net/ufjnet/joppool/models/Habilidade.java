@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,6 @@ public class Habilidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idHabilidade; //pensar se isso é realmente necessário para a
 								  //relação e não apenas uma chave estrangeira
-	
 	@Column(name = "cursosExtras_vaga", nullable = false)
 	private String cursosExtra;
 	
@@ -38,4 +38,7 @@ public class Habilidade {
 
 	@Column(name = "experiencia_vaga", nullable = false)
 	private String experiencia;
+	
+	@ManyToOne()
+	private Aluno aluno;
 }

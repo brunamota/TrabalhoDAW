@@ -1,6 +1,6 @@
 package net.ufjnet.joppool.services;
 
-import javax.validation.Valid;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,13 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.VagaDTO;
 import net.ufjnet.joppool.exceptions.BusinessException;
+import net.ufjnet.joppool.models.Empresa;
 import net.ufjnet.joppool.models.Vaga;
+import net.ufjnet.joppool.repositories.EmpresaDAO;
 import net.ufjnet.joppool.repositories.VagaDAO;
 
 @AllArgsConstructor
 @Service
 public class GestaoVaga {
 	private VagaDAO dao_vaga;
+	private EmpresaDAO dao_empresa;
 	
 	@Transactional(readOnly = true)
 	public Page<VagaDTO> findAll(Pageable pageable){
@@ -44,8 +47,15 @@ public class GestaoVaga {
 	
 	
 	@Transactional
-	public VagaDTO save(@Valid VagaDTO obj) {
-		Vaga entityVaga = new Vaga(obj.getIdVaga(), obj.getNome(), obj.getQuantidade(), obj.getPorcentagem(),obj.getRemuneracao(), obj.getRequisitos(), obj.getAtividades(),obj.getHorasSemanais(), obj.getPeriodoDia());
+	public VagaDTO save(VagaDTO obj) {
+		Vaga entityVaga = new Vaga(obj.getIdVaga(), obj.getNome(), obj.getQuantidade(),
+				obj.getPorcentagem(),obj.getRemuneracao(), obj.getRequisitos(),
+				obj.getAtividades(),obj.getHorasSemanais(), obj.getPeriodoDia(),
+				new Empresa(obj.getEmpresa().getIdEmpresa(), obj.getEmpresa().getNome(),
+						obj.getEmpresa().getCnpj(), obj.getEmpresa().getEmail(),
+						obj.getEmpresa().getTelefone(), obj.getEmpresa().getEndereco(),
+						obj.getEmpresa().getCidade(),obj.getEmpresa().getEstado(),
+						obj.getEmpresa().getAreaAtuacao()));
 		
 		boolean nomeExists = dao_vaga.findByNome(entityVaga.getNome())
 				.stream()
@@ -54,6 +64,10 @@ public class GestaoVaga {
 		if(nomeExists) {
 			throw new BusinessException("Nome já cadastrado!");
 		}
+
+		Optional<Empresa> empresa = dao_empresa.findById(obj.getEmpresa().getIdEmpresa());
+		
+		entityVaga.setEmpresa(empresa.orElse(null));
 		
 		return new VagaDTO(dao_vaga.save(entityVaga));
 	}

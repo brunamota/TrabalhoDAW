@@ -3,6 +3,8 @@ package net.ufjnet.joppool.controllers;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -101,7 +103,7 @@ public class EmpresaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Insere uma nova empresa")
-	public ResponseEntity<EmpresaDTO> incluir(@RequestBody EmpresaDTO objBody){
+	public ResponseEntity<EmpresaDTO> incluir(@RequestBody @Valid EmpresaDTO objBody){
 		EmpresaDTO objDTO = service.save(objBody);
 		objDTO.add(linkTo(methodOn(EmpresaController.class).buscarUm(objDTO.getIdEmpresa())).withSelfRel());
 		return ResponseEntity.ok(objDTO);

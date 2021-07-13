@@ -2,6 +2,10 @@ package net.ufjnet.joppool.dtos;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -24,31 +28,46 @@ import net.ufjnet.joppool.models.Empresa;
 public class EmpresaDTO extends RepresentationModel<EmpresaDTO> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull(groups = ValidationGroups.EmpresaId.class)
 	@EqualsAndHashCode.Include
 	@JsonProperty("codigo_empresa")
 	private Integer idEmpresa;
 	
+	@Size(max=60)
+	@NotBlank
 	@JsonProperty("nome_empresa")
 	private String nome;
 	
+	@Size(max=18)//XX.XXX.XXX/0001-XX
+	@NotBlank
 	@JsonProperty("cnpj_empresa")
 	private String cnpj;
 	
+	@Email
+	@NotBlank
 	@JsonProperty("email_empresa")
 	private String email;
 
 	@JsonProperty("telefone_empresa")
 	private String telefone;
 
+	@Size(max=14)//(00)00000-0000
+	@NotBlank
 	@JsonProperty("endereco_empresa")
 	private String endereco;
-
+	
+	@Size(max=30)
+	@NotBlank
 	@JsonProperty("cidade_empresa")
 	private String cidade;
 
+	@Size(max=2)
+	@NotBlank
 	@JsonProperty("estado_empresa")
 	private String estado;
-
+	
+	@Size(max=60)
+	@NotBlank
 	@JsonProperty("areaAtuacao_empresa")
 	private String areaAtuacao;
 
@@ -62,6 +81,7 @@ public class EmpresaDTO extends RepresentationModel<EmpresaDTO> implements Seria
 		this.cidade = obj.getCidade();
 		this.estado = obj.getEstado();
 		this.areaAtuacao = obj.getAreaAtuacao();
+		
 	}
 	
 	

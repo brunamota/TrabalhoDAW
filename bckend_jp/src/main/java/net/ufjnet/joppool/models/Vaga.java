@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -36,42 +35,32 @@ public class Vaga implements Serializable {
 	@Column(name="codigo_vaga")
 	private Integer idVaga;
 	
-	@Size(max = 60)
-	@NotBlank
 	@Column(name = "nome_vaga", nullable = false)
 	private String nome;
-	
-	@Size(max = 60)
-	@NotBlank
+
 	@Column(name = "quantidade_vaga", nullable = false)
 	private String quantidade;
-	
-	@Size(max = 3)//0% a 100%
-	@NotBlank
+
 	@Column(name = "porcetagem_vaga", nullable = false)
 	private String porcentagem;
-	
-	@Size(max = 12)
-	@NotBlank
+
 	@Column(name = "remuneracao_vaga", nullable = false)
 	private String remuneracao;
-	
-	@NotBlank
+
 	@Column(name = "requisitos_vaga", nullable = false)
 	private String requisitos;
-	
-	@NotBlank
+
 	@Column(name = "atividades_vaga", nullable = false)
 	private String atividades;
-	
-	@Size(max=2)//0 a 30
-	@NotBlank
+
 	@Column(name = "horasSemanais_vaga", nullable = false)
 	private String horasSemanais;
-	
-	@NotBlank
+
 	@Column(name = "periodoDia_vaga", nullable = false)
 	private String periodoDia;
+	
+	@ManyToOne()
+	private Empresa empresa;
 	
 	//pensar se a empresa pode ter um campo para colocar uma descrição
 	
