@@ -38,7 +38,7 @@ public class VagaController {
 	private GestaoVaga service;
 	
 	@GetMapping
-	@Operation(summary = "Busca todas as empresas")
+	@Operation(summary = "Busca todas as vagas")
 	public ResponseEntity<CollectionModel<VagaDTO>> buscarTodos(
 			@RequestParam(value ="page", defaultValue ="0") int page,
 			@RequestParam(value ="limit", defaultValue ="12") int limit,
@@ -59,7 +59,7 @@ public class VagaController {
 	}
 		
 	@GetMapping("/{idVaga}")
-	@Operation(summary = "Busca uma empresa por id")
+	@Operation(summary = "Busca uma vaga por id")
 	public ResponseEntity<VagaDTO>buscarUm(@PathVariable Integer idVaga){
 		VagaDTO objDTO = service.findById(idVaga);
 		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(idVaga)).withSelfRel());
@@ -67,7 +67,7 @@ public class VagaController {
 		
 	}
 	@GetMapping("/nome/{nome}")
-	@Operation(summary = "Busca uma empresa por nome")
+	@Operation(summary = "Busca uma vaga por nome")
 	public ResponseEntity<VagaDTO> buscarNome(@PathVariable String nome) {
 		VagaDTO objDTO = service.findByNome(nome);
 			objDTO.add(linkTo(methodOn(VagaController.class).buscarNome(nome)).withSelfRel());
@@ -76,7 +76,7 @@ public class VagaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@Operation(summary = "Insere uma nova empresa")
+	@Operation(summary = "Insere uma nova vaga")
 	public ResponseEntity<VagaDTO> incluir(@RequestBody @Valid VagaDTO objBody){
 		VagaDTO objDTO = service.save(objBody);
 		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(objDTO.getIdVaga())).withSelfRel());
@@ -84,7 +84,7 @@ public class VagaController {
 	}
 	
 	@PutMapping
-	@Operation(summary = "Atualiza uma empresa por id")
+	@Operation(summary = "Atualiza uma vaga por id")
 	public ResponseEntity<VagaDTO> atualizar(@RequestBody VagaDTO objBody) {
 		VagaDTO objDTO = service.update(objBody);
 		objDTO.add(linkTo(methodOn(VagaController.class).buscarUm(objDTO.getIdVaga())).withSelfRel());
@@ -92,7 +92,7 @@ public class VagaController {
 	}
 	
 	@DeleteMapping("/{idVaga}")
-	@Operation(summary = "Exclui uma empresa por id")
+	@Operation(summary = "Exclui uma vaga por id")
 	public ResponseEntity<Void> excluir(@PathVariable Integer idVaga) {
 		if (!service.existById(idVaga)) {
 			return ResponseEntity.notFound().build();

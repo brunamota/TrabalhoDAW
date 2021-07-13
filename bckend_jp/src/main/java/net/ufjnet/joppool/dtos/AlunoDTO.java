@@ -57,7 +57,7 @@ public class AlunoDTO extends RepresentationModel<AlunoDTO> implements Serializa
 	@JsonProperty("telefone_aluno")
 	private String telefone;
 	
-	@Size(max=60)
+	@Size(max=255)
 	@NotBlank
 	@JsonProperty("endereco_aluno")
 	private String endereco;

@@ -48,15 +48,17 @@ public class EmpresaDTO extends RepresentationModel<EmpresaDTO> implements Seria
 	@JsonProperty("email_empresa")
 	private String email;
 
+	@Size(max=14)//(00)00000-0000
+	@NotBlank
 	@JsonProperty("telefone_empresa")
 	private String telefone;
 
-	@Size(max=14)//(00)00000-0000
+	@Size(max=255)
 	@NotBlank
 	@JsonProperty("endereco_empresa")
 	private String endereco;
 	
-	@Size(max=30)
+	@Size(max=60)
 	@NotBlank
 	@JsonProperty("cidade_empresa")
 	private String cidade;
@@ -66,7 +68,7 @@ public class EmpresaDTO extends RepresentationModel<EmpresaDTO> implements Seria
 	@JsonProperty("estado_empresa")
 	private String estado;
 	
-	@Size(max=60)
+	@Size(max=255)
 	@NotBlank
 	@JsonProperty("areaAtuacao_empresa")
 	private String areaAtuacao;
