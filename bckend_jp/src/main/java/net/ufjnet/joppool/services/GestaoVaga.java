@@ -49,7 +49,7 @@ public class GestaoVaga {
 	@Transactional
 	public VagaDTO save(VagaDTO obj) {
 		Vaga entityVaga = new Vaga(obj.getIdVaga(), obj.getNome(), obj.getQuantidade(),
-				obj.getPorcentagem(),obj.getRemuneracao(), obj.getRequisitos(),
+				obj.getPorcentagem(),obj.getRemuneracao(),
 				obj.getAtividades(),obj.getHorasSemanais(), obj.getPeriodoDia(),
 				new Empresa(obj.getEmpresa().getIdEmpresa(), obj.getEmpresa().getNome(),
 						obj.getEmpresa().getCnpj(), obj.getEmpresa().getEmail(),

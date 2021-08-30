@@ -1,15 +1,12 @@
 package net.ufjnet.joppool.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -71,26 +68,5 @@ public class Aluno implements Serializable{
 
 	@Column(name = "periodo_aluno", nullable = false)
 	private String periodo;
-	
-	@OneToMany(mappedBy = "aluno")
-	private List<Habilidade>habilidades = new ArrayList<>();
 
-	public Aluno(Integer idAluno, String nome, String cpf, String email, String dataNascimento, String telefone,
-			String endereco, String cidade, String estado, String instituicao, String curso, String matricula,
-			String periodo)
-	{
-		this.idAluno = idAluno;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.instituicao = instituicao;
-		this.curso = curso;
-		this.matricula = matricula;
-		this.periodo = periodo;
-	}
 }

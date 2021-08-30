@@ -1,7 +1,5 @@
 package net.ufjnet.joppool.services;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.HabilidadeDTO;
 import net.ufjnet.joppool.exceptions.BusinessException;
-import net.ufjnet.joppool.models.Aluno;
 import net.ufjnet.joppool.models.Habilidade;
-import net.ufjnet.joppool.repositories.AlunoDAO;
 import net.ufjnet.joppool.repositories.HabilidadeDAO;
 
 @AllArgsConstructor
@@ -20,8 +16,6 @@ import net.ufjnet.joppool.repositories.HabilidadeDAO;
 public class GestaoHabilidade {
 	
 	private HabilidadeDAO dao_habilidade;
-	
-	private AlunoDAO dao_aluno;
 	
 	
 	@Transactional(readOnly = true)
@@ -41,18 +35,7 @@ public class GestaoHabilidade {
 	
 	@Transactional
 	public HabilidadeDTO save(HabilidadeDTO obj) {
-		Habilidade entityHabilidade = new Habilidade(obj.getIdHabilidade(), obj.getCursosExtra(), obj.getConhecimentos(), obj.getExperiencia(),
-				new Aluno(obj.getAluno().getIdAluno(), obj.getAluno().getNome(),
-						obj.getAluno().getCpf(), obj.getAluno().getEmail(),obj.getAluno().getDataNascimento(),
-						obj.getAluno().getTelefone(), obj.getAluno().getEndereco(),
-						obj.getAluno().getCidade(),obj.getAluno().getEstado(),
-						obj.getAluno().getInstituicao(), obj.getAluno().getCurso(), obj.getAluno().getMatricula(),
-						obj.getAluno().getPeriodo()));
-
-
-		Optional<Aluno> Aluno = dao_aluno.findById(obj.getAluno().getIdAluno());
-		
-		entityHabilidade.setAluno(Aluno.orElse(null));
+		Habilidade entityHabilidade = new Habilidade(obj.getIdHabilidade(), obj.getConhecimentos());
 		
 		return new HabilidadeDTO(dao_habilidade.save(entityHabilidade));
 	}
@@ -71,7 +54,7 @@ public class GestaoHabilidade {
 		Habilidade entity = dao_habilidade.findById(obj.getIdHabilidade())
 				.orElseThrow(() -> new BusinessException("Registros não encontrados!!!"));
 		
-		entity.setExperiencia(obj.getExperiencia());
+		entity.setConhecimentos(obj.getConhecimentos());
 		
 	
 		return new HabilidadeDTO(dao_habilidade.save(entity));

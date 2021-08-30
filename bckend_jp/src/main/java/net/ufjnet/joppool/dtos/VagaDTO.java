@@ -26,7 +26,7 @@ import net.ufjnet.joppool.models.Vaga;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true,  callSuper = false)
-@JsonPropertyOrder({"codigo_vaga","nome_vaga","quantidade_vaga","porcentagem_vaga","remuneracao_vaga","requisitos_vaga","atividades_vaga","horasSemanais_vaga", "periodo_vaga"})
+@JsonPropertyOrder({"codigo_vaga","nome_vaga","quantidade_vaga","porcentagem_vaga","remuneracao_vaga","atividades_vaga","horasSemanais_vaga", "periodo_vaga"})
 public class VagaDTO extends RepresentationModel<VagaDTO> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -48,16 +48,12 @@ public class VagaDTO extends RepresentationModel<VagaDTO> implements Serializabl
 	@Size(max = 3)//0% a 100%
 	@NotBlank
 	@JsonProperty("porcentagem_vaga")
-	private String porcentagem;
+	private int porcentagem;
 	
 	@Size(max = 12)
 	@NotBlank
 	@JsonProperty("remuneracao_vaga")
 	private String remuneracao;
-	
-	@NotBlank
-	@JsonProperty("requisitos_vaga")
-	private String requisitos;
 	
 	@NotBlank
 	@JsonProperty("atividades_vaga")
@@ -84,10 +80,10 @@ public class VagaDTO extends RepresentationModel<VagaDTO> implements Serializabl
 		this.quantidade = obj.getQuantidade();
 		this.porcentagem = obj.getPorcentagem();
 		this.remuneracao = obj.getRemuneracao();
-		this.requisitos = obj.getRequisitos();
 		this.atividades = obj.getAtividades();
 		this.horasSemanais = obj.getHorasSemanais();
-		this.periodoDia = obj.getPeriodoDia();		
+		this.periodoDia = obj.getPeriodoDia();
+		
 		empresa = new EmpresaDTO(obj.getEmpresa());
 	}
 }

@@ -26,9 +26,6 @@ import lombok.Setter;
 public class Vaga implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//pensar na forma de relação das vagas com aluno e empresa,
-	//para aparecer de acordo com as habilidades e curso/area de atuação
-	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +39,10 @@ public class Vaga implements Serializable {
 	private String quantidade;
 
 	@Column(name = "porcetagem_vaga", nullable = false)
-	private String porcentagem;
+	private int porcentagem;
 
 	@Column(name = "remuneracao_vaga", nullable = false)
 	private String remuneracao;
-
-	@Column(name = "requisitos_vaga", nullable = false)
-	private String requisitos;
 
 	@Column(name = "atividades_vaga", nullable = false)
 	private String atividades;
