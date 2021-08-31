@@ -75,7 +75,7 @@ public class BckendJpApplication implements CommandLineRunner{
 		r1 = bCrypt.encode("admin123");
 		r2 = bCrypt.encode("user123");
 		
-		Aluno aluno01 = new Aluno(1,"Bruna", "1234560", "bruna@jp", "13/08/1999", "(64)99126-7848","Rua osorio de Assis,178", "Jatai","GO","UFJ","Ciencia da Computacao", "201901985","4");
+		Aluno aluno01 = new Aluno(1,"Bruna", "1234560", "bruna_mota@discente.ufj.edu.br", "13/08/1999", "(64)99126-7848","Rua osorio de Assis,178", "Jatai","GO","UFJ","Ciencia da Computacao", "201901985","4");
 		Aluno aluno02 = new Aluno(2,"Lígia", "12345", "ligia@jp", "03/02/2000", "(64)99126-0000","Rua osorio de Assis,166", "Jatai","GO","UFJ","Ciencia da Computacao", "201901980", "4");
 		
 		alunoDAO.saveAll(Arrays.asList(aluno01, aluno02));

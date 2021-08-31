@@ -19,6 +19,8 @@ public class GestaoCoordenador {
 	
 	private CoordenadorDAO dao_coordenador;
 	
+	EnviarMailService email =  new EnviarMailService();
+	
 	@Transactional(readOnly = true)
 	public Page<CoordenadorDTO> findAll(Pageable pageable){
 		Page<Coordenador> result = dao_coordenador.findAll(pageable);
@@ -99,6 +101,13 @@ public class GestaoCoordenador {
 			throw new BusinessException("Portaria já cadastrada!");
 		}*/
 		
+		
+		try {
+			String textoMail = "Informamos que seus dados foram cadastrados no sistema Gestão de Obras";
+			email.enviar(entityCoordenador.getEmail(), "Cadastro Efetuado!", textoMail);
+		} catch (Exception e) {
+			throw new BusinessException("Erro no envio do e-mail!");
+		}
 		
 		return new CoordenadorDTO(dao_coordenador.save(entityCoordenador));
 	}
