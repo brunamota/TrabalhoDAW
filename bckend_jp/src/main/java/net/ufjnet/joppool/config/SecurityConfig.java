@@ -14,7 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-///import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
+//import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
 
 @Configuration
 @EnableWebSecurity

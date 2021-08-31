@@ -7,9 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import net.ufjnet.joppool.config.FileStorageConfig;
 import net.ufjnet.joppool.models.Aluno;
 import net.ufjnet.joppool.models.Compatibilidade;
 import net.ufjnet.joppool.models.Coordenador;
@@ -30,6 +32,7 @@ import net.ufjnet.joppool.repositories.VagaDAO;
 @EnableAutoConfiguration
 @ComponentScan
 @SpringBootApplication
+@EnableConfigurationProperties({FileStorageConfig.class})
 public class BckendJpApplication implements CommandLineRunner{
 	
 	@Autowired
