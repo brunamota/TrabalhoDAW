@@ -63,15 +63,20 @@ public class BckendJpApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(BckendJpApplication.class, args);
 		
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(16);
-		String result = bCryptPasswordEncoder.encode("admin123");
-		System.out.println("Senha criptografada " + result);
-
+		//BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(16);
+		//String result = bCryptPasswordEncoder.encode("admin123");
+		//System.out.println("Senha criptografada " + result);
+		System.out.println("Job Pool");
 
 		}
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		//ExecutaRunner();
+	}
+	
+	public void ExecutaRunner() {
 		
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(16);
 		

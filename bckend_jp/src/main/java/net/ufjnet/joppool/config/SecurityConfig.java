@@ -43,11 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-				.authorizeRequests()
-				.antMatchers("/auth/assinatura","v1/jp/**", "v3/api-docs/**", "/swagger-ui.html**").permitAll()
+				/*.authorizeRequests()
+				.antMatchers("/auth/login","v1/jp/**", "v3/api-docs/**", "/swagger-ui.html**").permitAll()
 				.antMatchers("/v1/jp/**").authenticated()
 				.antMatchers("/users").denyAll()
 				.and()
+				.cors()
+				.and()*/
 				.apply(new JwtConfigurer(tokenProvider));
 			
 	}

@@ -51,14 +51,15 @@ public class AutenticaController {
 	@Operation(summary = "Autentica um usuário e retorna um token")
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> assina(@RequestBody UserDTO objDTO) {
+		System.out.println(objDTO.getUsername());
 		try {
 			
 			String username = objDTO.getUsername();
 			String password = objDTO.getPassword();
 			
+			System.out.println(username + " - "+ password);
 						
 			User obj = dao.findByUsername(username);
-			
 			
 			String token = "";
 			
