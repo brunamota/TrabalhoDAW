@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.HabilidadeDTO;
-import net.ufjnet.joppool.exceptions.BusinessException;
 import net.ufjnet.joppool.models.Habilidade;
 import net.ufjnet.joppool.repositories.HabilidadeDAO;
+import net.ufjnet.joppool.services.exceptions.BusinessException;
 
 @AllArgsConstructor
 @Service

@@ -28,7 +28,7 @@ import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
 
 @Tag(name = "Autenticação Endpoint") 
 @RestController
-@RequestMapping("/autentica")
+@RequestMapping("/auth")
 public class AutenticaController {
 	
 	@Autowired
@@ -49,22 +49,16 @@ public class AutenticaController {
 		}
 	
 	@Operation(summary = "Autentica um usuário e retorna um token")
-	@PostMapping(value = "/assinatura")
+	@PostMapping(value = "/login")
 	public ResponseEntity<?> assina(@RequestBody UserDTO objDTO) {
 		try {
 			
 			String username = objDTO.getUsername();
 			String password = objDTO.getPassword();
 			
-			System.out.println("/1/");
-			System.out.println(username+" - "+password);
-			System.out.println("/1/");
-			
+						
 			User obj = dao.findByUsername(username);
-			obj.setAccountNonExpired(true);
-			obj.setAccountNonLocked(true);
-			obj.setCredentialsNonExpired(true);
-			obj.setEnabled(true);
+			
 			
 			String token = "";
 			
@@ -73,21 +67,11 @@ public class AutenticaController {
 			} else {
 				throw new UsernameNotFoundException("Usuário " + obj.getUsername() + " não encontrado!");
 			}
-			
-			System.out.println("/2/");
-			System.out.println(obj.isAccountNonLocked());
-			System.out.println("/2/");
-			
-			UsernamePasswordAuthenticationToken tok = new UsernamePasswordAuthenticationToken(username, password);
-			
-			System.out.println("/3/");
-			System.out.println(tok);
-			System.out.println("/3/");
-			
+						
+			UsernamePasswordAuthenticationToken tok = new UsernamePasswordAuthenticationToken(username, password);		
+						
 			authenticationManager.authenticate(tok);
-				
-			
-			
+						
 			Map<Object, Object> model = new HashMap<>();
 			model.put("username", obj.getUsername());
 			model.put("token", token);
@@ -95,5 +79,5 @@ public class AutenticaController {
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException(e.getMessage());
 		}
-		}
+	}
 }

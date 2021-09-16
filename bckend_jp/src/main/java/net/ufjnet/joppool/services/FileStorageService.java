@@ -6,12 +6,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.ufjnet.joppool.config.FileStorageConfig;
-import net.ufjnet.joppool.exceptions.FileStorageException;
+import net.ufjnet.joppool.services.exceptions.FileStorageException;
+import net.ufjnet.joppool.services.exceptions.MyFileNotFoundException;
 
 @Service
 public class FileStorageService {
@@ -42,7 +45,22 @@ public class FileStorageService {
 			return fileName;
 		} catch (Exception e) {
 			
-			throw new FileStorageException("Não foi possiveç salvar o arquivo"+fileName+". Tente novamente!", e);
-		}
+			throw new FileStorageException("Não foi possivel salvar o arquivo"+fileName+". Tente novamente!", e);
+		}		
+	}
+	
+	public Resource loadFileAsResource(String fileName) {
+		
+		try {
+			Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+			Resource resource = new UrlResource(filePath.toUri());
+			if(resource.exists()) {
+				return resource;
+			} else {
+				throw new MyFileNotFoundException("Arquivo não encontrado: "+fileName+"!");
+			}
+		} catch (Exception e) {
+			throw new MyFileNotFoundException("Arquivo não encontrado: "+fileName+"!",e);
+			}
 	}
 }

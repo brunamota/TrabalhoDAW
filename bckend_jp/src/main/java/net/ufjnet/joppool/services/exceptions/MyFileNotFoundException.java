@@ -1,4 +1,4 @@
-package net.ufjnet.joppool.exceptions;
+package net.ufjnet.joppool.services.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -20,7 +20,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import net.ufjnet.joppool.exceptions.InvalidAuthenticationException;
+import net.ufjnet.joppool.services.exceptions.InvalidAuthenticationException;
 
 
 @Service

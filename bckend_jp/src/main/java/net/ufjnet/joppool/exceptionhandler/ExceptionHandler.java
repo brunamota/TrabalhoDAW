@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import net.ufjnet.joppool.exceptions.BusinessException;
-import net.ufjnet.joppool.exceptions.InvalidAuthenticationException;
+import net.ufjnet.joppool.services.exceptions.BusinessException;
+import net.ufjnet.joppool.services.exceptions.InvalidAuthenticationException;
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler{

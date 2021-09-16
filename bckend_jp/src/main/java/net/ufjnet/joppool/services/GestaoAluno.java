@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.AlunoDTO;
-import net.ufjnet.joppool.exceptions.BusinessException;
 import net.ufjnet.joppool.models.Aluno;
 import net.ufjnet.joppool.repositories.AlunoDAO;
+import net.ufjnet.joppool.services.exceptions.BusinessException;
 
 @AllArgsConstructor
 @Service

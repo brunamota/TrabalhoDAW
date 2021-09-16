@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.VagaDTO;
-import net.ufjnet.joppool.exceptions.BusinessException;
 import net.ufjnet.joppool.models.Empresa;
 import net.ufjnet.joppool.models.Vaga;
 import net.ufjnet.joppool.repositories.EmpresaDAO;
 import net.ufjnet.joppool.repositories.VagaDAO;
+import net.ufjnet.joppool.services.exceptions.BusinessException;
 
 @AllArgsConstructor
 @Service

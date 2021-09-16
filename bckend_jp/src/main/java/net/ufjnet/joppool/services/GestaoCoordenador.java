@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import net.ufjnet.joppool.dtos.CoordenadorDTO;
-import net.ufjnet.joppool.exceptions.BusinessException;
 import net.ufjnet.joppool.models.Coordenador;
 import net.ufjnet.joppool.repositories.CoordenadorDAO;
+import net.ufjnet.joppool.services.exceptions.BusinessException;
 
 @AllArgsConstructor
 @Service

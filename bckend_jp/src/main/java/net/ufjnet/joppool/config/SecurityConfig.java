@@ -2,6 +2,7 @@ package net.ufjnet.joppool.config;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,14 +15,15 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-//import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
+import net.ufjnet.jobpool.security.jwt.JwtConfigurer;
+import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//@Autowired
-	//private JwtTokenProvider tokenProvider;
+	@Autowired
+	private JwtTokenProvider tokenProvider;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -42,11 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 				.authorizeRequests()
-				.antMatchers("/autentica/assinatura", "v3/api-docs/**", "/swagger-ui.html**").permitAll()
+				.antMatchers("/auth/assinatura","v1/jp/**", "v3/api-docs/**", "/swagger-ui.html**").permitAll()
 				.antMatchers("/v1/jp/**").authenticated()
-				.antMatchers("/users").denyAll();
-			//.and()
-			//.apply(new JwtTokenConfigure(tokenProvider));
+				.antMatchers("/users").denyAll()
+				.and()
+				.apply(new JwtConfigurer(tokenProvider));
+			
 	}
 
 
