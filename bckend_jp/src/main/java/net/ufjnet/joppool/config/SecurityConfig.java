@@ -15,7 +15,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import net.ufjnet.jobpool.security.jwt.JwtConfigurer;
+import net.ufjnet.joppool.security.jwt.JwtConfigurer;
 import net.ufjnet.joppool.security.jwt.JwtTokenProvider;
 
 @Configuration
@@ -43,13 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-				/*.authorizeRequests()
+				.authorizeRequests()
 				.antMatchers("/auth/login","v1/jp/**", "v3/api-docs/**", "/swagger-ui.html**").permitAll()
 				.antMatchers("/v1/jp/**").authenticated()
 				.antMatchers("/users").denyAll()
 				.and()
 				.cors()
-				.and()*/
+				.and()
 				.apply(new JwtConfigurer(tokenProvider));
 			
 	}
